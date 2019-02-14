@@ -21,14 +21,14 @@ export class Foo {}
 export class Bar {}
 
 // demo/baz.ts
-export class Baz {}
+export default Baz
 ```
 
 ...then instead of doing...
 ```javascript
 import { Foo } from '../demo/foo';
 import { Bar } from '../demo/bar';
-import { Baz } from '../demo/baz';
+import Baz from '../demo/baz';
 ```
 
 ...you can create a **Barrel** that rolls up all of these separate modules...
@@ -36,12 +36,12 @@ import { Baz } from '../demo/baz';
 // demo/index.ts
 export * from './foo'; // re-export all of its exports
 export * from './bar'; // re-export all of its exports
-export * from './baz'; // re-export all of its exports
+export { default as Baz } from './baz'; // re-export default export
 ```
 
 ...into a single module with multiple named exports...
 ```javascript
-import { Foo, Bar, Baz } from '../demo'; // demo/index.ts is implied
+import { Foo, Bar, Baz } from './demo'; // demo/index.ts is implied
 ```
 
 #### Reference
