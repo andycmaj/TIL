@@ -4,7 +4,7 @@ Repository for tracking what we're learning
 
 ## 2019/02/13
 
-### [Barreling](https://basarat.gitbooks.io/typescript/docs/tips/barrel.html) (javascript)
+### [Barreling](https://basarat.gitbooks.io/typescript/docs/tips/barrel.html) (javascript, typescript)
 
 The practice of rolling up a bunch of ES modules in a directory into a single group of named exports, using `index.js`.
 
