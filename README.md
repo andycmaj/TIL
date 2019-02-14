@@ -12,6 +12,26 @@ The practice of rolling up a bunch of ES modules in a directory into a single gr
 
 #### Example
 
+if you have...
+```javascript
+// demo/foo.ts
+export class Foo {}
+
+// demo/bar.ts
+export class Bar {}
+
+// demo/baz.ts
+export class Baz {}
+```
+
+...then instead of doing...
+```javascript
+import { Foo } from '../demo/foo';
+import { Bar } from '../demo/bar';
+import { Baz } from '../demo/baz';
+```
+
+...you can create a **Barrel** that rolls up all of these separate modules...
 ```javascript
 // demo/index.ts
 export * from './foo'; // re-export all of its exports
@@ -19,6 +39,7 @@ export * from './bar'; // re-export all of its exports
 export * from './baz'; // re-export all of its exports
 ```
 
+...into a single module with multiple named exports...
 ```javascript
 import { Foo, Bar, Baz } from '../demo'; // demo/index.ts is implied
 ```
