@@ -68,6 +68,9 @@ The correct way to do this, from [React docs](https://reactjs.org/docs/react-dom
 
 So basically, you need to force a state-triggered re-render right after `hydrate()` (using `componentDidMount()`.
 
+**Caveat**: Watch out for UI flicker if you do this. You'll be able to see the original SSR'd content flash for a tick before 
+re-render happens with client-side version.
+
 #### Example
 
 ```javascript
