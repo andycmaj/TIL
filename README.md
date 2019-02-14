@@ -48,3 +48,57 @@ import { Foo, Bar, Baz } from './demo'; // demo/index.ts is implied
 
 - [Blog](https://medium.com/@klauskpm/do-a-barrel-export-aa5b79b76b05)
 - [Typescript documentation](https://basarat.gitbooks.io/typescript/docs/tips/barrel.html)
+
+## 2019/02/14
+
+### [`ReactDOM.hydrate()` is not `ReactDOM.render()`](https://stackoverflow.com/a/46516869) (javascript, react, ssr)
+
+> @andycunn
+
+When you're using React SSR, **initial** client-side-rendered **DOM structure** must EXACTLY 
+match server-side-rendered DOM. Otherwise the client-side-render will not be what you expect.
+
+You CAN change innerText of nodes on the initial render but NOT structure/attributes. This is because components' `render` funcs when in the context of `hydrate()` only attach event handlers. DOM reconciliation does not happen during `hydrate()`. 
+
+So your React DOM will look like what you expect, but the browser DOM will not match the React DOM.
+
+The correct way to do this, from [React docs](https://reactjs.org/docs/react-dom.html#hydrate):
+
+> If you intentionally need to render something different on the server and the client, you can do a two-pass rendering. Components that render something different on the client can read a state variable like `this.state.isClient`, which you can set to true in `componentDidMount()`. This way the initial render pass will render the same content as the server, avoiding mismatches, but an additional pass will happen synchronously right after hydration. Note that this approach will make your components slower because they have to render twice, so use it with caution.
+
+So basically, you need to force a state-triggered re-render right after `hydrate()` (using `componentDidMount()`.
+
+#### Example
+
+```javascript
+const SplitTestingThing = ({ experimentName, base, experiment, isClient }) => (
+  <>
+    {isClient ? (
+      // for client-side (post-didmount), render actual content
+      <Experiment name={experimentName}>
+        <Variant name={base.name}>{base.content}</Variant>
+        <Variant name={experiment.name}>{experiment.content}</Variant>
+      </Experiment>
+    ) : (
+      // for server-side and hydrate-pass, render skeleton/placeholder/default.
+      base.content
+    )}
+  </>
+);
+
+const SplitTesting = compose(
+  withState('isClient', 'setIsClient', false),
+  lifecycle({
+    componentDidMount() {
+      // trigger a full render/reconcile pass once mounted in browser dom
+      this.props.setIsClient(true);
+    },
+  })
+)(SplitTestingThing);
+```
+
+#### Reference
+
+* [SO answer on why `render` and `hydrate` are different](https://stackoverflow.com/questions/46516395/whats-the-difference-between-hydrate-and-render-in-react-16)
+* [`If you call ReactDOM.hydrate() on a node that already has this server-rendered markup, React will preserve it and only attach event handlers, allowing you to have a very performant first-load experience.`](https://reactjs.org/docs/react-dom-server.html#rendertostring)
+* [`...we don't patch up the attributes.`](https://github.com/facebook/react/issues/10189#issue-243147750)
