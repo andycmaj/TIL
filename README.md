@@ -105,3 +105,54 @@ const SplitTesting = compose(
 * [SO answer on why `render` and `hydrate` are different](https://stackoverflow.com/questions/46516395/whats-the-difference-between-hydrate-and-render-in-react-16)
 * [`If you call ReactDOM.hydrate() on a node that already has this server-rendered markup, React will preserve it and only attach event handlers, allowing you to have a very performant first-load experience.`](https://reactjs.org/docs/react-dom-server.html#rendertostring)
 * [`...we don't patch up the attributes.`](https://github.com/facebook/react/issues/10189#issue-243147750)
+
+## 2019/02/15
+
+### [Hooks](https://reactjs.org/docs/hooks-intro.html) are an official thing in React 16.8
+
+The promise of hooks is that you can use React features, like state, without writing component classes. This allows you to separate your state logic from your components cleanly and in a reusable manner. The stateful logic exists as an independent function that can be tested in isolation and shared without changing component higherarchy.
+
+#### Let's Compare
+
+A basic example of a component that uses state to keep track of button clicks
+
+```javascript
+// class version using state
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <p>You clicked {this.state.count} times</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Click me
+        </button>
+      </div>
+    );
+  }
+}
+
+// hook version using state
+function Example() {
+  // Declare a new state variable, which we'll call "count"
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+```
+
+#### References
+* https://reactjs.org/docs/hooks-intro.html
