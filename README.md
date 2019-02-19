@@ -231,3 +231,73 @@ After realizing that hooks would not work with the current Netlify CMS version, 
 
 * [The Netlify CMS bug](https://github.com/netlify/netlify-cms/issues/2026)
 * [Hooks don't work in classes](https://reactjs.org/docs/hooks-overview.html#but-what-is-a-hook)
+
+## 2019/02/18
+
+### You can use multiple github accounts with multiple SSH keys in same environment (javascript)
+
+> @andycunn
+
+I have 2 github accounts. My work account and my personal account. In the past, i've had trouble working 
+with both accounts on one laptop. This is mainly because my personal account has an old SSH-key created 
+on a different laptop.
+
+I don't want to add both SSH keys to both accounts on github, so on my work laptop, i used to use HTTPS git 
+with my personal account and SSH git with my work account. This got super annoying so i figured out how to
+use multiple git-ssh keys on one environment.
+
+Basically, you need both ssh keys, and a modified ssh config.
+
+#### Walkthrough
+
+##### SSH config
+
+assuming i have 2 ssh keys, one for work, and one for personal...
+
+```
+Personal key: `id_personal`/`id_personal.pub`
+Work key: `id_work`/`id_work.pub`
+```
+
+... this is my `~/.ssh/config`
+
+```bash
+Host github-work
+ HostName github.com
+ AddKeysToAgent yes
+ UseKeychain yes
+ User git
+ IdentityFile ~/.ssh/id_work
+
+Host github-personal
+ HostName github.com
+ AddKeysToAgent yes
+ UseKeychain yes
+ User git
+ IdentityFile ~/.ssh/id_personal
+```
+
+##### Cloning repos
+
+```bash
+# cloning using your personal account
+
+$ git clone git@github-personal:personalandy/project.git 
+$ cd project
+$ git config user.name personalandy
+$ git config user.email personalandy@gmail.com
+```
+
+```bash
+# cloning using your work account
+
+$ git clone git@github-work:workandy/project.git 
+$ cd project
+$ git config user.name workandy
+$ git config user.email workandy@gmail.com
+```
+
+#### References
+
+* https://medium.com/@trionkidnapper/ssh-keys-with-multiple-github-accounts-c67db56f191e
+* https://gist.github.com/jexchan/2351996
