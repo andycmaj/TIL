@@ -156,3 +156,40 @@ function Example() {
 
 #### References
 * https://reactjs.org/docs/hooks-intro.html
+
+## 2019/02/18
+
+### [Arrow functions don't really have a `this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#Arrow_functions_used_as_methods) (javascript)
+
+> @andycunn
+
+An arrow function does not have its own `this`. When you use `this` in an arrow function, the `this` value of the enclosing [lexical scope](https://spin.atomicobject.com/2014/10/20/javascript-scope-closures/) is used.
+
+Because of this difference between arrow functions and `function` functions, arrow functions are best suited for non-method functions (functions that are not part of a class).
+
+#### Example
+
+As stated previously, arrow function expressions are best suited for non-method functions. Let's see what happens when we try to use them as methods:
+
+```javascript
+var obj = {
+  i: 10,
+  b: () => console.log(this.i, this),
+  c: function() {
+    console.log(this.i, this);
+  }
+}
+
+
+obj.b(); // prints undefined, Window {...} (or the global object, which is the closest enclosing scope)
+
+obj.c(); // prints 10, Object {...}
+```
+
+#### Reference
+
+* [MDN Arrow Function docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#No_separate_this)
+* [`arrow function expressions are best suited for non-method functions`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#Arrow_functions_used_as_methods)
+
+
+
