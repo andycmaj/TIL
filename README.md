@@ -110,6 +110,8 @@ const SplitTesting = compose(
 
 ### [Hooks](https://reactjs.org/docs/hooks-intro.html) are an official thing in React 16.8
 
+> @daveymeyer
+
 The promise of hooks is that you can use React features, like state, without writing component classes. This allows you to separate your state logic from your components cleanly and in a reusable manner. The stateful logic exists as an independent function that can be tested in isolation and shared without changing component higherarchy.
 
 #### Let's Compare
@@ -191,5 +193,41 @@ obj.c(); // prints 10, Object {...}
 * [MDN Arrow Function docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#No_separate_this)
 * [`arrow function expressions are best suited for non-method functions`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#Arrow_functions_used_as_methods)
 
+### Hooks are great, but they probably aren't worth a full transition yet
 
+> @daveymeyer
 
+This line from the documentation straightforward enough:
+
+> Hooks don’t work inside classes — they let you use React without classes.
+
+Cool, so use hooks in a function component. Everything seems to be working great when testing the component locally. But when inserted into a production environment, the terrifying 
+
+> Hooks can only be called inside the body of a function component.
+
+error is seen. In my case, this was due to the fact that Netlify CMS is using an older version of React and [does not yet support hooks](https://github.com/netlify/netlify-cms/issues/2026) for custom CMS components. So even though the code I had written was hook-complient, it did not work when combined with the rest of the ecosystem.
+
+But all is not lost. I attempted to refactor my CMS widget to use hooks because I had created a confusing mess of nested components. Using hooks, the components seemed to be much cleaner:
+
+```javascript
+// With Hooks
+export const SliderComponent = props => {
+  const [values, setValues] = useState([33, 66]);
+
+  const handleChange = value => {
+    ...
+  };
+
+  return (
+    ...
+    <Slider values={values} handleChange={handleChange} />
+  );
+};
+```
+
+After realizing that hooks would not work with the current Netlify CMS version, I had to update my refactored components to once again use `recompose`. This was quite trivial. And the result was almost just as clean. So even though I probably did and am still missing some obvious simplifications/improvements, this process showed me the power of approaching a problem differently. By trying to apply hooks, a concept that seemed more intuitive on the surface, I better understood more general approaches for structuring and combining components. So that's pretty cool.
+
+#### References
+
+* [The Netlify CMS bug](https://github.com/netlify/netlify-cms/issues/2026)
+* [Hooks don't work in classes](https://reactjs.org/docs/hooks-overview.html#but-what-is-a-hook)
