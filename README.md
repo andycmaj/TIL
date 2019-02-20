@@ -397,5 +397,6 @@ const Preview = props => (
 The `CSSInjector` takes the contents of the `head` and passes it to the iframe. So wrapping the Preview component in this injector gives us all of the missing styles.
 
 #### References
-https://www.netlifycms.org/docs/custom-widgets/
-https://github.com/netlify/netlify-cms/issues/793
+* https://www.netlifycms.org/docs/custom-widgets/
+* https://github.com/netlify/netlify-cms/issues/793
+* https://github.com/netlify/netlify-cms/issues/793#issuecomment-457873402
