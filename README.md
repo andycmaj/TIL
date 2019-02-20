@@ -288,10 +288,12 @@ $ git config user.name personalandy
 $ git config user.email personalandy@gmail.com
 ```
 
+... or you can use `ssh://` prototol, which skips the `git@` user...
+
 ```bash
 # cloning using your work account
 
-$ git clone git@github-work:workandy/project.git 
+$ git clone ssh://github-work/workandy/project.git 
 $ cd project
 $ git config user.name workandy
 $ git config user.email workandy@gmail.com
