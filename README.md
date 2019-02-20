@@ -232,7 +232,7 @@ After realizing that hooks would not work with the current Netlify CMS version, 
 * [The Netlify CMS bug](https://github.com/netlify/netlify-cms/issues/2026)
 * [Hooks don't work in classes](https://reactjs.org/docs/hooks-overview.html#but-what-is-a-hook)
 
-## 2019/02/18
+## 2019/02/19
 
 ### You can use multiple github accounts with multiple SSH keys in same environment (git, ssh)
 
