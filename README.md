@@ -333,3 +333,67 @@ The above code inserts non-breaking spaces and zero width non-joiner half-spaces
 
 #### References
 https://litmus.com/blog/the-little-known-preview-text-hack-you-may-want-to-use-in-every-email
+
+### Styling custom Netlify CMS widgets is confusing
+
+> @daveymeyer
+
+Netlify gives you the ability to extend their out of the box CMS widgets by adding your own. One option for doing this is registering custom React components to handle the `Control` (editing content) and the `Preview` for the custom datatype. The custom components are then registered using the [registerWidget](https://www.netlifycms.org/docs/custom-widgets/#registerwidget) extension on the global `CMS` object.
+
+```javascript
+CMS.registerWidget('experiment', Editor, Preview);
+```
+
+What isn't clear from this seemingly simple process, is the difference in how the two components are consumed and the implications that has on things like styles.
+
+* The Editor (Control) Component
+
+This component is loaded directly on the `/admin/collections/myWidget/new` page. Styles applied inline via `emotion` are correctly applied, but styles that rely on class names and stylesheets are missing. When Netlify consumes the component, it doesn't load the custom CSS without being explicitly told to. So the class names exist, but there are no styles to map to.
+
+This issue can be resolved by explicitly providing the stylesheet to the Control widget. One way to do this is to load the stylesheet in the header of the component:
+
+```javascript
+const Editor = props => (
+  <>
+    <Helmet>
+      <link rel="stylesheet" href="/admin/cms.css" />
+    </Helmet>
+    <SplitTestsControl {...props} />
+  </>
+);
+```
+
+Now when Netlify loads the component, all of the inline styles and the custom stylesheet styles are available and correctly applied.
+
+* Preview Component
+
+The Preview component is loaded in an iframe alongside the Control widget. The issue here is that the styles exist in the head of the page, but the iframe does not have access to those styles. So we need to explicitly inject the styles into the frame for consumption by our component:
+
+```javascript
+class CSSInjector extends React.Component {
+  constructor() {
+    super();
+    const iframe = document.getElementsByTagName('iframe')[0];
+    const iframeHead = iframe.contentDocument.head;
+    this.cache = createCache({ container: iframeHead });
+  }
+
+  render() {
+    return (
+      <CacheProvider value={this.cache}>{this.props.children}</CacheProvider>
+    );
+  }
+}
+
+const Preview = props => (
+  <CSSInjector>
+    <SplitTestsPreview {...props} />
+  </CSSInjector>
+);
+```
+
+The `CSSInjector` takes the contents of the `head` and passes it to the iframe. So wrapping the Preview component in this injector gives us all of the missing styles.
+
+#### References
+https://www.netlifycms.org/docs/custom-widgets/
+https://github.com/netlify/netlify-cms/issues/793
