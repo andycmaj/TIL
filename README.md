@@ -301,3 +301,35 @@ $ git config user.email workandy@gmail.com
 
 * https://medium.com/@trionkidnapper/ssh-keys-with-multiple-github-accounts-c67db56f191e
 * https://gist.github.com/jexchan/2351996
+
+
+### Email preheader hack
+
+```html
+<div style="display: none; max-height: 0px; overflow: hidden;">
+        <!-- Preheader message here -->
+    </div>
+    <div style="display: none; max-height: 0px; overflow: hidden;">&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;</div>
+```
+
+another treatment:
+
+```html
+        <!-- Create white space after the desired preview text so email clients don’t pull other distracting text into the inbox preview. Extend as necessary. -->
+
+        <!-- Preview Text Spacing Hack : BEGIN -->
+
+        <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+
+        &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; 
+
+        </div>
+
+        <!-- Preview Text Spacing Hack : END -->
+
+```
+
+The above code inserts non-breaking spaces and zero width non-joiner half-spaces in a visually hidden div. This is added to "theoretically" push content down so that the preheader text is not encroached on by the body copy, or worse, an alt-tag from an image.
+
+#### References
+https://litmus.com/blog/the-little-known-preview-text-hack-you-may-want-to-use-in-every-email
