@@ -234,7 +234,7 @@ After realizing that hooks would not work with the current Netlify CMS version, 
 
 ## 2019/02/18
 
-### You can use multiple github accounts with multiple SSH keys in same environment (javascript)
+### You can use multiple github accounts with multiple SSH keys in same environment (git, ssh)
 
 > @andycunn
 
