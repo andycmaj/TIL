@@ -400,3 +400,20 @@ The `CSSInjector` takes the contents of the `head` and passes it to the iframe. 
 * https://www.netlifycms.org/docs/custom-widgets/
 * https://github.com/netlify/netlify-cms/issues/793
 * https://github.com/netlify/netlify-cms/issues/793#issuecomment-457873402
+
+## 2019-02-20
+
+### Three Wins or Rule of 3
+
+I have a ton of shit to do, and it's often hard to focus on one for any amount of time without thinknig about one of the others. To-do lists don't really help because the amount of things i WANT to do grows faster than the amount of things 
+i get done. 
+
+The Three Wins technique is one of the simplest time-management techniques I've found, and seems to be working for 
+me so far. The gist is this: 
+
+> Essentially you define (and actually write down) what three things you want to get done. ... Wins can be defined for whatever timeframe you want (weekly, monthly, etc.).
+
+I use a Trello board with 3 color levels: this week (green), this month (yellow), this year (red).
+
+
+
