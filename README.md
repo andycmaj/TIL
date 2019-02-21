@@ -413,8 +413,20 @@ me so far. The gist is this:
 
 > Essentially you define (and actually write down) what three things you want to get done. ... Wins can be defined for whatever timeframe you want (weekly, monthly, etc.).
 
+#### Example
+
 I use a Trello board with 3 color levels: this week (green), this month (yellow), this year (red).
 
 ![my board](./ScreenCapture%20at%20Thu%20Feb%2021%2010%3A37%3A51%20PST%202019.png)
 
+Here's how i use the board:
+* Start every day by figuring out what to focus on for the day.
+* Test myself throughout the day – am I doing things that are actually getting me closer to my wins? 
+* If new things come up, i ask myself if they align with my goals. If so, great. If not, i'll asses whether they deserve to be added as a future week/month/year win.
 
+
+#### References
+
+* [Getting Results the Agile Way: A Personal Results System for Work and Life](https://www.amazon.com/Getting-Results-Agile-Way-ebook/dp/B005X0MFD2)
+* [Three Wins Technique Review - a Simple Productivity Hack to Deliver What Matters](http://dontcodetired.com/blog/post/Three-Wins-Technique-Review-a-Simple-Productivity-Hack-to-Deliver-What-Matters)
+* [Rule of Three](https://alifeofproductivity.com/rule-of-three/)
