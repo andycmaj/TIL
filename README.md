@@ -415,5 +415,6 @@ me so far. The gist is this:
 
 I use a Trello board with 3 color levels: this week (green), this month (yellow), this year (red).
 
+![my board](./ScreenCapture%20at%20Thu%20Feb%2021%2010%3A37%3A51%20PST%202019.png)
 
 
