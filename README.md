@@ -336,7 +336,7 @@ The above code inserts non-breaking spaces and zero width non-joiner half-spaces
 #### References
 https://litmus.com/blog/the-little-known-preview-text-hack-you-may-want-to-use-in-every-email
 
-### Styling custom Netlify CMS widgets is confusing
+### Styling custom Netlify CMS widgets is confusing (javascript, netlify-cms, css)
 
 > @daveymeyer
 
@@ -403,7 +403,9 @@ The `CSSInjector` takes the contents of the `head` and passes it to the iframe. 
 
 ## 2019-02-20
 
-### Three Wins or Rule of 3
+### Three Wins or Rule of 3 (productivity)
+
+> @andycunn
 
 I have a ton of shit to do, and it's often hard to focus on one for any amount of time without thinknig about one of the others. To-do lists don't really help because the amount of things i WANT to do grows faster than the amount of things 
 i get done. 
