@@ -510,3 +510,40 @@ Because both `getValue` and `handleChange` are using the same data, this works w
 * https://github.com/netlify/netlify-cms/blob/master/packages/netlify-cms-widget-select/src/SelectControl.js
 * https://www.netlifycms.org/docs/custom-widgets/
 * https://www.netlifycms.org/docs/authentication-backends/
+
+## 2019-02-22
+
+### What on earth is a 'Face-Cord'?
+
+> @twhidby
+
+A face cord is an informal unit of volume for stacked firewood, sometimes called a rick.
+
+Width and height is typically the same as a cord, but the depth can vary. The front face is the same as a cord (4'x8'), hence the name. The depth is generally commonly 16" (for use in residential fireplaces) but can be anything from 12 inches to 32 inches.
+
+The two most common ways to measure firewood is by the "Full Cord" or "Face Cord". The difference between the two is that a full cord of firewood is an amount of wood that fills a space equal to eight feet long by four feet high by four feet deep. A standard length for firewood in a full cord is 16" long and most of the time a full cord of firewood will consist of three rows stacked four feet wide and eight feet long.
+
+A face cord of firewood is equal to a single stack of firewood that measures four feet high by 8 feet long by however deep the depth of the firewood is. Log length in a face cord of firewood varies and there isn't a standard length.
+
+Deciding which firewood storage option is best suited for you will depend on the amount of firewood you wish to store. For example, if you wish to store enough firewood for a few single wood burning sessions or for maybe a weeks worth of firewood at a time, a firewood rack would probably be the best option for you. If you wish to store enough firewood to last throughout the entire winter season, a firewood storage shed would be best suited for you.
+
+
+```javascript
+[
+  {
+    name: 'faceCord', value: '4\'x8\''
+  },
+  {
+    name: 'halfFaceCord', value: '4\'x4\''
+  },
+  {
+    name: 'quarterFaceCord', value: '4\'x2\''
+  }
+]
+```
+
+
+#### References
+
+* https://en.wikipedia.org/wiki/Face_cord
+* https://www.northlineexpress.com/face-cord-vs-full-cord-of-firewood.html
