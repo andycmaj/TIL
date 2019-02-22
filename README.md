@@ -531,13 +531,13 @@ Deciding which firewood storage option is best suited for you will depend on the
 ```javascript
 [
   {
-    name: 'faceCord', value: '4\'x8\''
+    name: 'faceCord', value: '4 x 8'
   },
   {
-    name: 'halfFaceCord', value: '4\'x4\''
+    name: 'halfFaceCord', value: '4 x 4'
   },
   {
-    name: 'quarterFaceCord', value: '4\'x2\''
+    name: 'quarterFaceCord', value: '4 x 2'
   }
 ]
 ```
