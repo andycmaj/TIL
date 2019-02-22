@@ -432,3 +432,81 @@ Here's how i use the board:
 * [Getting Results the Agile Way: A Personal Results System for Work and Life](https://www.amazon.com/Getting-Results-Agile-Way-ebook/dp/B005X0MFD2)
 * [Three Wins Technique Review - a Simple Productivity Hack to Deliver What Matters](http://dontcodetired.com/blog/post/Three-Wins-Technique-Review-a-Simple-Productivity-Hack-to-Deliver-What-Matters)
 * [Rule of Three](https://alifeofproductivity.com/rule-of-three/)
+
+## 2019-02-21
+
+### Connecting the Netlify CMS Widget
+
+> @daveymeyer
+
+Creating a custom Netlify CMS widget has been more work than I expected. In retrospect, it pretty much makes sense. But the journey to figuring it out was longer than it should have been. As someone who likes to figure out how something works by "try this, see what happens", the iteration process was slow because I was waiting for deploy previews to test CMS.
+
+As it turns out, you can test this locally quite easily. Netlify offers multiple backend options for your CMS, and one of them is for local testing:
+
+```yml
+backend:
+  # for testing locally
+  name: test-repo
+
+  # for using git
+  name: git-gateway
+```
+
+When you specify `test-repo`, you use an in-memory CMS. So there is no existing data, you can only "add" new data. This presented an interesting problem because I specifically wanted to avoid creating content via CMS. But we'll get back to that later.
+
+For my initial POC, I was circumnavigating the `/admin` page alltogether. I was simply displaying my widget on a random page with test data. This is how I tested the logic and styling of the widget. This involved keeping track of state withing the widget. This worked fine with my test data, but once I started to consume the data from the git backent I ran into another issue. Netlify provides each of the two components, `Control` and `Preview`, with a prop called `value`. This is supposed to be the value of the CMS field being handled by the custom widget. But when I started to consume it, it was in an unexpected format. Instead of the expected array of obects:
+
+```javascript
+[
+  {
+    name: 'someName', value: 20
+  },
+  {
+    name: 'otherName', value: 80
+  }
+]
+```
+
+I was seeing some strange construct of deeply nested objects that contained the data. @andycunn kindly pointed out that this was because Netlify was using `immutable-js` on their end to store state. To convert the data from their format, you can simply apply the `toJS` extension method to the data provided.
+
+The final missing piece was replacing the "test data" and "component state" with only Netlify data. In a real CMS widget, Netlify is the source of state. They provide the current value and a way to update the current value. So instead of using test data as "input" and using that to set component state, I consumed the Netlify data and derived all of the needed data from that.
+
+The next piece was handling changes to data. This was simply a matter of switching my change handler from updating my component state to reporting back the values to Netlify via the provided `onChange` callback (remembering to converit to to an immutable structure first with `fromJS`).
+
+Now Netlify is the source of state for both components. The `Control` component is able to both display the current value as well as update the current value. The `Preview` component only shows the current value.
+
+As mentioned above, I was still having issues testing this locally. Since I only wanted to modify existing data, I didn't have a good story around starting with no data. So I found a way to simulate Netlify's remote data store locally. Instead of using the `value` prop directly, I used a psudo remote state by changing the input to test data again. This resulted accessing state the same way (via `value` and `handleChange`), but instead of using Netlify data I was using local data:
+
+```
+var testData = [
+  { name: 'test1', percentage: 20 },
+  { name: 'test2', percentage: 80 },
+];
+
+const getValue = props => {
+  // how we would normally access Netlify data
+  var raw = props.value ? props.value : '';
+  return List.isList(raw) ? raw.toJS() : raw;
+
+  // how we can use local test data
+  return testData;
+};
+
+const handleChange = value => {
+  var variants = getValue(props);
+
+  variants.forEach((variant, index) => {
+    variant.percentage = value[index];
+  });
+  props.onChange(fromJS(variants));
+};
+```
+
+Because both `getValue` and `handleChange` are using the same data, this works whether you are using Netlify or your own test data. Dumb, but cool.
+
+#### References
+
+* https://immutable-js.github.io/immutable-js/docs/#/List/toJS
+* https://github.com/netlify/netlify-cms/blob/master/packages/netlify-cms-widget-select/src/SelectControl.js
+* https://www.netlifycms.org/docs/custom-widgets/
+* https://www.netlifycms.org/docs/authentication-backends/
