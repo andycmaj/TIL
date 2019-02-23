@@ -22,7 +22,7 @@ const Page = ({
         <article>
           <small>{toHumanDate(date)} by Andy</small>
           <header>
-            <Link to={`til/`}>{title}</Link>
+            <Link to={`til/${slug}`}>{title}</Link>
           </header>
           <p>{subtitle}</p>
         </article>
