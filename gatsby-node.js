@@ -1,7 +1,4 @@
-const _ = require(`lodash`);
-const Promise = require(`bluebird`);
 const path = require(`path`);
-const slash = require(`slash`);
 
 // Implement the Gatsby API “createPages”. This is
 // called after the Gatsby bootstrap is finished so you have
@@ -25,7 +22,7 @@ exports.createPages = ({ graphql, actions }) => {
   ).then(result => {
     if (result.errors) {
       console.error(result.errors);
-      reject(result.errors);
+      throw new Error(result.errors[0]);
     }
 
     const tils = result.data.allContentfulTil.edges;

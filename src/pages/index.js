@@ -56,7 +56,7 @@ export default Page;
 
 export const pageQuery = graphql`
   {
-    allContentfulTil {
+    allContentfulTil(sort: { fields: [date], order: DESC }) {
       edges {
         node {
           slug
