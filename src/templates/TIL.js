@@ -31,9 +31,7 @@ export default function Template({
       summary: {
         childMarkdownRemark: { html: summary },
       },
-      example: {
-        childMarkdownRemark: { html: example },
-      },
+      example,
       references: {
         childMarkdownRemark: { html: references },
       },
@@ -56,10 +54,18 @@ export default function Template({
           <h2>{title}</h2>
         </header>
         <section dangerouslySetInnerHTML={{ __html: summary }} />
-        <header>
-          <h3>Example</h3>
-        </header>
-        <div dangerouslySetInnerHTML={{ __html: example }} />
+        {example && (
+          <>
+            <header>
+              <h3>Example</h3>
+            </header>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: example.childMarkdownRemark.html,
+              }}
+            />
+          </>
+        )}
         <header>
           <h3>References</h3>
         </header>
