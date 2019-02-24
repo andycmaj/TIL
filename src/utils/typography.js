@@ -4,11 +4,21 @@ import {
   TABLET_MEDIA_QUERY,
 } from 'typography-breakpoint-constants';
 import theme from 'typography-theme-fairy-gates';
-import './global.css';
 
 // https://github.com/KyleAMathews/typography.js#themes
 const typography = new Typography({
   ...theme,
+  headerWeight: '400',
+  googleFonts: [
+    {
+      name: 'Work Sans',
+      styles: ['400', '600'],
+    },
+    {
+      name: 'Quattrocento Sans',
+      styles: ['400', '400i', '700'],
+    },
+  ],
   overrideStyles: ({ adjustFontSizeTo, scale, rhythm }, options) => ({
     [TABLET_MEDIA_QUERY]: {
       // Make baseFontSize on mobile 17px.
@@ -23,12 +33,25 @@ const typography = new Typography({
       },
     },
     a: {
-      color: '#007acc',
+      color: '#00A385',
       textDecoration: 'none',
     },
     'a:hover,a:active': {
-      boxShadow: '0 1px 0 0 currentColor',
+      boxShadow: '0 2px 0 0 currentColor',
       textDecoration: 'none',
+    },
+    'h1 a, h2 a, h3 a, h4 a, h5 a, h6 a': {
+      color: 'inherit',
+    },
+    h3: {
+      marginTop: rhythm(1),
+    },
+    blockquote: {
+      borderLeft: '0.25rem solid var(--blockCode-bg)',
+      marginLeft: '-1.25rem',
+      paddingLeft: '1rem',
+      marginTop: rhythm(1),
+      fontStyle: 'italic',
     },
   }),
 });

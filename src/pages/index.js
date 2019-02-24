@@ -2,6 +2,17 @@ import React from 'react';
 import Layout from '../components/Layout';
 import { graphql, Link } from 'gatsby';
 import toHumanDate from '../utils/toHumanDate';
+import styled from '@emotion/styled';
+import { rhythm } from '../utils/typography';
+
+const Article = styled.article`
+  width: 600px;
+  margin: ${rhythm(2)} auto;
+
+  h2 {
+    margin: 0 0 ${rhythm(0.5)};
+  }
+`;
 
 const Page = ({
   data: {
@@ -19,13 +30,15 @@ const Page = ({
           date,
         },
       }) => (
-        <article>
-          <small>{toHumanDate(date)} by Andy</small>
+        <Article>
           <header>
-            <Link to={`til/${slug}`}>{title}</Link>
+            <small>{toHumanDate(date)} by Andy</small>
+            <h2>
+              <Link to={`til/${slug}`}>{title}</Link>
+            </h2>
           </header>
           <p>{subtitle}</p>
-        </article>
+        </Article>
       )
     )}
   </Layout>

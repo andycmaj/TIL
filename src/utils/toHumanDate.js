@@ -8,11 +8,12 @@ const toLocaleStringSupportsLocales = () => {
 };
 
 const toHumanDate = date => {
+  date = new Date(date);
+
   if (!toLocaleStringSupportsLocales()) {
-    return date;
+    return date.toDateString();
   }
 
-  date = new Date(date);
   return date.toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'long',
