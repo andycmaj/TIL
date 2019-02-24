@@ -53,13 +53,13 @@ export default function Template({
           </Tags>
           <h2>{title}</h2>
         </header>
-        <div dangerouslySetInnerHTML={{ __html: summary }} />
+        <section dangerouslySetInnerHTML={{ __html: summary }} />
         {example && (
           <>
             <header>
               <h3>Example</h3>
             </header>
-            <div
+            <section
               dangerouslySetInnerHTML={{
                 __html: example.childMarkdownRemark.html,
               }}
@@ -69,9 +69,7 @@ export default function Template({
         <header>
           <h3>References</h3>
         </header>
-        <section>
-          <div dangerouslySetInnerHTML={{ __html: references }} />
-        </section>
+        <section dangerouslySetInnerHTML={{ __html: references }} />
       </article>
     </Layout>
   );

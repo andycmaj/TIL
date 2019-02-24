@@ -45,7 +45,9 @@ const Page = ({
               <Link to={`til/${slug}`}>{title}</Link>
             </h2>
           </header>
-          <p>{subtitle}</p>
+          <section>
+            <p>{subtitle}</p>
+          </section>
         </Article>
       )
     )}

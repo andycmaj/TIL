@@ -13,9 +13,15 @@ const globalStyles = css`
     --blockCode-bg: #252728;
   }
 
+  ul {
+    list-style-position: inside;
+  }
+
   header,
-  section,
-  :not(blockquote) > p,
+  h4,
+  h5,
+  section > p,
+  section > ul,
   blockquote,
   pre[class*='language-'] {
     margin: 0 20px;
@@ -49,11 +55,6 @@ const globalStyles = css`
     margin-left: -1.25rem;
     padding-left: 1rem;
     font-style: italic;
-  }
-
-  section > p {
-    margin-left: 0;
-    margin-right: 0;
   }
 
   /**
