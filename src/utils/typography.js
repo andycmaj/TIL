@@ -49,13 +49,6 @@ const typography = new Typography({
     h3: {
       marginTop: rhythm(1),
     },
-    blockquote: {
-      borderLeft: '0.25rem solid var(--blockCode-bg)',
-      marginLeft: '-1.25rem',
-      paddingLeft: '1rem',
-      marginTop: rhythm(1),
-      fontStyle: 'italic',
-    },
   }),
 });
 

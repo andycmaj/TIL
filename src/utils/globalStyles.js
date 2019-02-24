@@ -15,7 +15,8 @@ const globalStyles = css`
 
   header,
   section,
-  p,
+  :not(blockquote) > p,
+  blockquote,
   pre[class*='language-'] {
     margin: 0 20px;
 
@@ -36,6 +37,18 @@ const globalStyles = css`
       min-width: 100%;
       float: left;
     }
+  }
+
+  blockquote {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  blockquote p {
+    border-left: 0.25rem solid var(--blockCode-bg);
+    margin-left: -1.25rem;
+    padding-left: 1rem;
+    font-style: italic;
   }
 
   section > p {

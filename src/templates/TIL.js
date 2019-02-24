@@ -53,7 +53,7 @@ export default function Template({
           </Tags>
           <h2>{title}</h2>
         </header>
-        <section dangerouslySetInnerHTML={{ __html: summary }} />
+        <div dangerouslySetInnerHTML={{ __html: summary }} />
         {example && (
           <>
             <header>
