@@ -33,15 +33,18 @@ const typography = new Typography({
       },
     },
     a: {
-      color: '#00A385',
+      color: 'var(--textLink)',
       textDecoration: 'none',
     },
     'a:hover,a:active': {
       boxShadow: '0 2px 0 0 currentColor',
       textDecoration: 'none',
     },
-    'h1 a, h2 a, h3 a, h4 a, h5 a, h6 a': {
+    'h1 a': {
       color: 'inherit',
+    },
+    'h2 a, h3 a, h4 a, h5 a, h6 a': {
+      color: 'var(--textLink)',
     },
     h3: {
       marginTop: rhythm(1),

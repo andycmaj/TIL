@@ -6,8 +6,8 @@ import styled from '@emotion/styled';
 import { rhythm } from '../utils/typography';
 
 const Article = styled.article`
-  width: 600px;
-  margin: ${rhythm(2)} auto;
+  margin-top: ${rhythm(2)};
+  margin-bottom: ${rhythm(2)};
 
   h2 {
     margin: 0 0 ${rhythm(0.5)};
