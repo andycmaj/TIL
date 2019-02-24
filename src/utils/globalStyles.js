@@ -18,11 +18,11 @@ const globalStyles = css`
   }
 
   header,
-  h4,
-  h5,
+  section > h4,
+  section > h5,
   section > p,
   section > ul,
-  blockquote,
+  section > blockquote,
   pre[class*='language-'] {
     margin: 0 20px;
 
@@ -37,6 +37,10 @@ const globalStyles = css`
     }
   }
 
+  .gatsby-highlight {
+    margin-top: 1em;
+  }
+
   pre[class*='language-'] {
     ${whenSmallerThan.tablet} {
       margin-right: 0;
@@ -45,16 +49,16 @@ const globalStyles = css`
     }
   }
 
-  blockquote {
+  section > blockquote {
     margin-top: 1rem;
     margin-bottom: 1rem;
-  }
 
-  blockquote p {
-    border-left: 0.25rem solid var(--blockCode-bg);
-    margin-left: -1.25rem;
-    padding-left: 1rem;
-    font-style: italic;
+    p {
+      border-left: 0.25rem solid var(--blockCode-bg);
+      margin-left: -1.25rem;
+      padding-left: 1rem;
+      font-style: italic;
+    }
   }
 
   /**
