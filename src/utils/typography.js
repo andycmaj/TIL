@@ -4,6 +4,7 @@ import {
   TABLET_MEDIA_QUERY,
 } from 'typography-breakpoint-constants';
 import theme from 'typography-theme-fairy-gates';
+import './global.css';
 
 // https://github.com/KyleAMathews/typography.js#themes
 const typography = new Typography({
@@ -20,6 +21,14 @@ const typography = new Typography({
       html: {
         fontSize: `${(16 / 16) * 100}%`,
       },
+    },
+    a: {
+      color: '#007acc',
+      textDecoration: 'none',
+    },
+    'a:hover,a:active': {
+      boxShadow: '0 1px 0 0 currentColor',
+      textDecoration: 'none',
     },
   }),
 });

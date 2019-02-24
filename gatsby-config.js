@@ -22,10 +22,10 @@ if (!spaceId || !accessToken) {
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby with Contentful`,
+    title: `The Daily TIL`,
     keywords: '',
     description: '',
-    siteUrl: '',
+    siteUrl: 'https://daily-til.netlify.com/',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -38,6 +38,7 @@ module.exports = {
     // },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+
     // {
     //   resolve: `gatsby-plugin-manifest`,
     //   options: {
@@ -54,7 +55,27 @@ module.exports = {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,
     },
-    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 590,
+            },
+          },
+          'gatsby-remark-autolink-headers',
+          {
+            resolve: 'gatsby-remark-prismjs',
+            options: {
+              inlineCodeMarker: '÷',
+            },
+          },
+          'gatsby-remark-smartypants',
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-typography`,
       options: {
