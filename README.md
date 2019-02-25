@@ -547,3 +547,94 @@ Deciding which firewood storage option is best suited for you will depend on the
 
 * https://en.wikipedia.org/wiki/Face_cord
 * https://www.northlineexpress.com/face-cord-vs-full-cord-of-firewood.html
+
+
+## 2019-02-25
+
+### Integrating Complex Automation into Netlify CI/CD Pipelines
+
+> @twhidby
+
+Our current deployment process consists of a few key factors: GitHub, Netlify, CircleCI
+
+My task was to create a workflow that integrated with our existing deployment process.
+This workflow required connecting to our deployments via Netlify and running a screenshot test on a variety of browsers & devices.
+
+CrossBrowserTesting - crossbrowsertesting.com
+This platform allows you to test your website on a plethora of browsers & devices. It has a variety of features such as Live Testing, Screenshot Testing, and Automated Testing. It also has a few integrations included so that you can connect with GitHub or other services you use.
+The GitHub integration is a webhook with a customizable URL to fit your automation needs.
+
+```
+http://crossbrowsertesting.com/api/v3/screenshots/?url=http://website.com&username=YOU&authkey=AUTH&browser_list_name=THELIST&send_email=true&email_list=user1@email.com,user2@email.com
+```
+
+Configuration options:
+- url: which URL you want to run a screenshot test on
+- username & authkey: user info for CBT account
+- browser_list_name: if you have a saved list of browsers you want to test, this is where you enter the name of that list
+  - I decided to use a combination of Mac/Windows/iOS/Android along with Chrome/Safari/Firefox/IE
+- send_email: boolean value that dictates whether or not to send a completion email to the user
+- email_list: list of email addresses to be notified upon screenshot test completion
+
+
+The issue I came across while setting this up was that I could only test one specific URL using the standard webhook approach.
+Thanks to a suggestion from @andycunn I started working with Zapier to connect the CBT webhook to our Netlify deployments. Using Zapier allowed me to dynamically change the URL to be tested based on our Netlify deployments.
+
+This workflow appeared to be working as intended, however each commit in a PR triggers a new Netlify deploy. This created some concurrent tests which our CBT plan doesn't support, causing Zapier to throw an error whenever it couldn't start another screenshot test (since one was already in progress).
+
+In order to fix this problem, another suggestion from @andycunn helped pave the way towards a new solution. CircleCI!
+As part of our CI/CD process, CircleCI runs a smoketest on our site. Along with help from @davemeyer I modified our `config.js` and `trigger-circle.sh` files to add a UI test alongside the current smoketest.
+
+In `trigger-circle.sh` I added two lines: `-d build_parameters[CIRCLE_JOB]=ui \` and `-d build_parameters[CIRCLE_JOB]=smoketest \`
+```sh
+curl -u ${CIRCLE_API_USER_TOKEN}: \
+      -d build_parameters[BASE_URL]=$DEPLOY_PRIME_URL \
+      -d build_parameters[SITE_NAME]=$SITE_NAME \
+      -d build_parameters[CIRCLE_JOB]=ui \
+      -d revision=$COMMIT_REF \
+      https://circleci.com/api/v1.1/project/github/fifteensixty/howardshultz-com/tree/pull/$REVIEW_ID
+curl -u ${CIRCLE_API_USER_TOKEN}: \
+      -d build_parameters[BASE_URL]=$DEPLOY_PRIME_URL \
+      -d build_parameters[SITE_NAME]=$SITE_NAME \
+      -d build_parameters[CIRCLE_JOB]=smoketest \
+      -d revision=$COMMIT_REF \
+      https://circleci.com/api/v1.1/project/github/fifteensixty/howardshultz-com/tree/pull/$REVIEW_ID
+```
+
+In `config.js`
+```yml
+ui:
+  docker:
+    - image: circleci/node:8-browsers
+
+  working_directory: ~/repo
+
+  steps:
+    - run:
+        name: Trigger Cross Browser Test
+        command: |
+          curl --user tw@1560llc.com:u53a26fc7e3bdb19 --data "browser_list_name=first&url=$BASE_URL" https://crossbrowsertesting.com/api/v3/screenshots/
+```
+
+and added that job to the workflow...
+```yml
+workflows:
+  version: 2
+  tests:
+    jobs:
+      - smoketest
+      - ui
+```
+
+As of now, the deployment process happens as follows:
+1. PR created/updated
+2. Netlify deploy
+3. CircleCI Jobs
+4. Screenshot Test
+5. Zapier - GH comment with link to Screenshot test
+
+
+#### References
+
+* https://help.crossbrowsertesting.com/screenshots/general/run-screenshot-git-commit-push/
+* https://crossbrowsertesting.com/apidocs/v3/
