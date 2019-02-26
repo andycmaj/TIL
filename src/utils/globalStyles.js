@@ -1,5 +1,6 @@
 import css from '@emotion/css';
 import { whenAtLeast, whenAtMost, whenSmallerThan } from './media';
+import { rhythm } from './typography';
 
 const globalStyles = css`
   body.light {
@@ -39,6 +40,13 @@ const globalStyles = css`
 
   .gatsby-highlight {
     margin-top: 1em;
+  }
+
+  section > h3,
+  section > h4,
+  section > h5 {
+    margin-top: ${rhythm(2)};
+    margin-bottom: ${rhythm(1)};
   }
 
   pre[class*='language-'] {
