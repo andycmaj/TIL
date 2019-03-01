@@ -18,7 +18,12 @@ const globalStyles = css`
     list-style-position: inside;
   }
 
+  section td {
+    border-bottom: none;
+  }
+
   header,
+  section > table,
   section > h4,
   section > h5,
   section > p,
@@ -35,6 +40,15 @@ const globalStyles = css`
     ${whenAtLeast.desktop} {
       width: 900px;
       margin: 0 auto;
+    }
+  }
+
+  section > p {
+    margin-top: 0;
+    margin-bottom: ${rhythm(0.5)};
+
+    &:last-of-type {
+      margin-bottom: 0;
     }
   }
 
