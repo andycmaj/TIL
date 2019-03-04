@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import toHumanDate from '../utils/toHumanDate';
 import { FaTag } from 'react-icons/fa';
 import { whenAtLeast, whenSmallerThan } from '../utils/media';
+import { Link } from 'gatsby';
 
 const Tags = styled.small`
   ${whenSmallerThan.tablet} {
@@ -13,6 +14,11 @@ const Tags = styled.small`
 
   ${whenAtLeast.tablet} {
     float: right;
+    margin-top: 4px;
+  }
+
+  a {
+    margin: 0 5px;
   }
 `;
 
@@ -49,7 +55,11 @@ export default function Template({
           </small>
           <Tags>
             <TagIcon />
-            {tags.join(', ')}
+            {tags.map(tag => (
+              <Link key={tag} to={`/tag/${tag}`}>
+                {tag}
+              </Link>
+            ))}
           </Tags>
           <h2>{title}</h2>
         </header>
