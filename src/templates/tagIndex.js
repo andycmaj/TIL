@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 import flattenTils from '../utils/flattenTils';
 import { FaTag } from 'react-icons/fa';
 import styled from '@emotion/styled';
+import { contains } from 'ramda';
 
 const TagIcon = styled(FaTag)`
   vertical-align: middle;
@@ -17,7 +18,9 @@ const TagIndexPage = ({
     allContentfulTil: { edges },
   },
 }) => {
-  const allTils = flattenTils(edges);
+  // Use allTills as that's already sorted.
+  const flattenedTils = flattenTils(edges);
+  const indexedTils = flattenedTils.filter(til => contains(til.slug, pages));
 
   return (
     <Layout
@@ -31,11 +34,9 @@ const TagIndexPage = ({
           {tag}
         </h2>
       </header>
-      {pages.map(({ slug }) => {
-        const til = allTils[slug];
-
-        return <TilListItem key={slug} {...til} />;
-      })}
+      {indexedTils.map(til => (
+        <TilListItem key={til.slug} {...til} />
+      ))}
     </Layout>
   );
 };

@@ -41,7 +41,7 @@ exports.createPages = ({ graphql, actions }) => {
     entries.forEach((entry, index) => {
       // Add this page to the tag index
       entry.node.tags.forEach(tag => {
-        indexEntry(tagIndex, tag, entry.node);
+        indexEntry(tagIndex, tag, entry.node.slug);
       });
 
       // Create the actual entry page
