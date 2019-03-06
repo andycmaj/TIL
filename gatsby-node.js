@@ -1,11 +1,11 @@
 const path = require(`path`);
 
-const addTagMapping = (map, tag, page) => {
-  if (!map[tag]) {
-    map[tag] = [];
+const indexEntry = (index, tag, entry) => {
+  if (!index[tag]) {
+    index[tag] = [];
   }
 
-  map[tag].push(page);
+  index[tag].push(entry);
 };
 
 // Implement the Gatsby API “createPages”. This is
@@ -24,7 +24,6 @@ exports.createPages = ({ graphql, actions }) => {
           edges {
             node {
               slug
-              title
               tags
             }
           }
@@ -37,29 +36,31 @@ exports.createPages = ({ graphql, actions }) => {
       throw new Error(result.errors[0]);
     }
 
-    const tils = result.data.allContentfulTil.edges;
-    const tagMap = {};
-    tils.forEach((til, index) => {
-      til.node.tags.forEach(tag => {
-        addTagMapping(tagMap, tag, til.node);
+    const entries = result.data.allContentfulTil.edges;
+    const tagIndex = {};
+    entries.forEach((entry, index) => {
+      // Add this page to the tag index
+      entry.node.tags.forEach(tag => {
+        indexEntry(tagIndex, tag, entry.node);
       });
 
+      // Create the actual entry page
       createPage({
-        path: `/til/${til.node.slug}`,
+        path: `/til/${entry.node.slug}`,
         component: tilTemplate,
         context: {
-          slug: til.node.slug,
+          slug: entry.node.slug,
         },
       });
     });
 
-    Object.keys(tagMap).forEach(tag => {
+    Object.keys(tagIndex).forEach(tag => {
       createPage({
         path: `/tag/${tag}`,
         component: tagIndexTemplate,
         context: {
           tag: tag,
-          pages: tagMap[tag],
+          pages: tagIndex[tag],
         },
       });
     });
