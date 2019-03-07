@@ -6,6 +6,7 @@ import toHumanDate from '../utils/toHumanDate';
 import { FaTag } from 'react-icons/fa';
 import { whenAtLeast, whenSmallerThan } from '../utils/media';
 import { Link } from 'gatsby';
+import Author from '../components/Author';
 
 const Tags = styled.small`
   ${whenSmallerThan.tablet} {
@@ -33,7 +34,7 @@ export default function Template({
       title,
       subtitle,
       date,
-      author: { name: authorName },
+      author,
       summary: {
         childMarkdownRemark: { html: summary },
       },
@@ -51,7 +52,7 @@ export default function Template({
       <article>
         <header>
           <small>
-            {toHumanDate(date)} by {authorName}
+            {toHumanDate(date)} by <Author withAvatar {...author} />
           </small>
           <Tags>
             <TagIcon />
@@ -93,6 +94,8 @@ export const pageQuery = graphql`
       date
       author {
         name
+        avatarUrl
+        githubUrl
       }
       summary {
         childMarkdownRemark {

@@ -54,6 +54,8 @@ export const pageQuery = graphql`
           date
           author {
             name
+            avatarUrl
+            githubUrl
           }
         }
       }
