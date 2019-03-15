@@ -25,7 +25,7 @@ module.exports = {
     title: `The Daily TIL`,
     keywords: '',
     description: '',
-    siteUrl: 'https://daily-til.netlify.com/',
+    siteUrl: 'https://todayilearned.io/',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
