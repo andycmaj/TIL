@@ -1,1 +1,1 @@
-https://daily-til.netlify.com/
+https://todayilearned.io
