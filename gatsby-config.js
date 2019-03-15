@@ -25,7 +25,7 @@ module.exports = {
     title: `The Daily TIL`,
     keywords: '',
     description: '',
-    siteUrl: 'https://todayilearned.io/',
+    siteUrl: 'https://todayilearned.io',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -93,12 +93,12 @@ module.exports = {
         // if you have a development env for your segment account, paste that key here
         // when process.env.NODE_ENV === 'development'
         // optional; non-empty string
-        devKey: `SEGMENT_DEV_WRITE_KEY`,
+        devKey: `w8DpBL4CbIx1ISHBP3DOQqCFVV3S9gbA`,
 
         // boolean (defaults to false) on whether you want
         // to include analytics.page() automatically
         // if false, see below on how to track pageviews manually
-        trackPage: true,
+        trackPage: false,
       },
     },
 

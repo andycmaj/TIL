@@ -28,7 +28,7 @@ const TagIcon = styled(FaTag)`
   margin-right: 0.25em;
 `;
 
-export default function Template({
+const TIL = ({
   data: {
     contentfulTil: {
       title,
@@ -46,45 +46,43 @@ export default function Template({
     },
   },
   location: { pathname },
-}) {
-  return (
-    <Layout pageTitle={title} pagePath={pathname} description={subtitle}>
-      <article>
-        <header>
-          <small>
-            {toHumanDate(date)} by <Author withAvatar {...author} />
-          </small>
-          <Tags>
-            <TagIcon />
-            {tags.map(tag => (
-              <Link key={tag} to={`/tag/${tag}`}>
-                {tag}
-              </Link>
-            ))}
-          </Tags>
-          <h2>{title}</h2>
-        </header>
-        <section dangerouslySetInnerHTML={{ __html: summary }} />
-        {example && (
-          <>
-            <header>
-              <h3>Example</h3>
-            </header>
-            <section
-              dangerouslySetInnerHTML={{
-                __html: example.childMarkdownRemark.html,
-              }}
-            />
-          </>
-        )}
-        <header>
-          <h3>References</h3>
-        </header>
-        <section dangerouslySetInnerHTML={{ __html: references }} />
-      </article>
-    </Layout>
-  );
-}
+}) => (
+  <Layout pageTitle={title} pagePath={pathname} description={subtitle}>
+    <article>
+      <header>
+        <small>
+          {toHumanDate(date)} by <Author withAvatar {...author} />
+        </small>
+        <Tags>
+          <TagIcon />
+          {tags.map(tag => (
+            <Link key={tag} to={`/tag/${tag}`}>
+              {tag}
+            </Link>
+          ))}
+        </Tags>
+        <h2>{title}</h2>
+      </header>
+      <section dangerouslySetInnerHTML={{ __html: summary }} />
+      {example && (
+        <>
+          <header>
+            <h3>Example</h3>
+          </header>
+          <section
+            dangerouslySetInnerHTML={{
+              __html: example.childMarkdownRemark.html,
+            }}
+          />
+        </>
+      )}
+      <header>
+        <h3>References</h3>
+      </header>
+      <section dangerouslySetInnerHTML={{ __html: references }} />
+    </article>
+  </Layout>
+);
 
 export const pageQuery = graphql`
   query($slug: String!) {
@@ -116,3 +114,5 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export default TIL;

@@ -25,6 +25,8 @@ exports.createPages = ({ graphql, actions }) => {
             node {
               slug
               tags
+              title
+              subtitle
             }
           }
         }
@@ -50,6 +52,8 @@ exports.createPages = ({ graphql, actions }) => {
         component: tilTemplate,
         context: {
           slug: entry.node.slug,
+          title: entry.node.title,
+          description: entry.node.subtitle,
         },
       });
     });
@@ -59,6 +63,7 @@ exports.createPages = ({ graphql, actions }) => {
         path: `/tag/${tag}`,
         component: tagIndexTemplate,
         context: {
+          title: `All '${tag} tags`,
           tag: tag,
           pages: tagIndex[tag],
         },
