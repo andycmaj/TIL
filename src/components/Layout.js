@@ -15,7 +15,7 @@ const Main = styled.main``;
 
 const Layout = ({ children, ...props }) => (
   <Container>
-    <MetaData foo={false} {...props} />
+    <MetaData {...props} />
     <Global styles={globalStyles} />
     <Header />
     <Main>{children}</Main>

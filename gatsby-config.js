@@ -2,7 +2,7 @@ let contentfulConfig;
 
 try {
   // Load the Contentful config from the .contentful.json
-  contentfulConfig = require('./contentful-1560');
+  contentfulConfig = require('./contentful-team');
 } catch (_) {}
 
 // Overwrite the Contentful config with environment variables if they exist
@@ -23,11 +23,13 @@ if (!spaceId || !accessToken) {
 module.exports = {
   siteMetadata: {
     title: `The Daily TIL`,
-    keywords: '',
-    description: '',
+    keywords: 'til, today-i-learned, web-development, development, learning',
+    description:
+      'As software engineers, we figure out how to do lots of things every day. Writing them down helps us actually learn and remember.',
     siteUrl: 'https://todayilearned.io',
   },
   plugins: [
+    `gatsby-plugin-sitemap`,
     `gatsby-plugin-react-helmet`,
     // {
     //   resolve: `gatsby-source-filesystem`,

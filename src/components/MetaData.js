@@ -15,10 +15,15 @@ const query = graphql`
   }
 `;
 
-const MetaData = ({ pageTitle, pagePath }) => {
+const MetaData = ({ pageTitle, pagePath, description }) => {
   const {
     site: {
-      siteMetadata: { description, siteUrl, keywords, title },
+      siteMetadata: {
+        description: defaultDescription,
+        siteUrl,
+        keywords,
+        title,
+      },
     },
   } = useStaticQuery(query);
 
@@ -34,7 +39,7 @@ const MetaData = ({ pageTitle, pagePath }) => {
 
       <link rel="canonical" href={`${siteUrl}${pagePath}`} />
       <link rel="shortcut icon" href="/favicon.ico" />
-      <meta name="description" content={description} />
+      <meta name="description" content={description || defaultDescription} />
       <meta name="keywords" content={keywords} />
       <meta
         name="viewport"
