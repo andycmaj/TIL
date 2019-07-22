@@ -14,10 +14,15 @@ const Page = ({
     description="Stuff I learned one day"
   >
     <section style={{ textAlign: 'center' }}>
+      <p>Software developers learn one million things every day.</p>
       <p>
-        As software engineers, we figure out how to do lots of things every day.
+        Then we forget those things the next day while we're learning one
+        million other things.
       </p>
-      <p>Writing them down helps us actually learn and remember.</p>
+      <p>
+        Sometimes it's nice to slow down for a minute and reflect on a few of
+        those things.
+      </p>
     </section>
     {pages.map(({ node }) => (
       <TilListItem key={node.slug} {...node} />
