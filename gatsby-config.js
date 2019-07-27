@@ -84,25 +84,25 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
-    {
-      resolve: `gatsby-plugin-segment-js`,
-      options: {
-        // your segment write key for your production environment
-        // when process.env.NODE_ENV === 'production'
-        // required; non-empty string
-        prodKey: `w8DpBL4CbIx1ISHBP3DOQqCFVV3S9gbA`,
+    // {
+    //   resolve: `gatsby-plugin-segment-js`,
+    //   options: {
+    //     // your segment write key for your production environment
+    //     // when process.env.NODE_ENV === 'production'
+    //     // required; non-empty string
+    //     prodKey: `w8DpBL4CbIx1ISHBP3DOQqCFVV3S9gbA`,
 
-        // if you have a development env for your segment account, paste that key here
-        // when process.env.NODE_ENV === 'development'
-        // optional; non-empty string
-        devKey: `w8DpBL4CbIx1ISHBP3DOQqCFVV3S9gbA`,
+    //     // if you have a development env for your segment account, paste that key here
+    //     // when process.env.NODE_ENV === 'development'
+    //     // optional; non-empty string
+    //     devKey: `w8DpBL4CbIx1ISHBP3DOQqCFVV3S9gbA`,
 
-        // boolean (defaults to false) on whether you want
-        // to include analytics.page() automatically
-        // if false, see below on how to track pageviews manually
-        trackPage: false,
-      },
-    },
+    //     // boolean (defaults to false) on whether you want
+    //     // to include analytics.page() automatically
+    //     // if false, see below on how to track pageviews manually
+    //     trackPage: false,
+    //   },
+    // },
 
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
