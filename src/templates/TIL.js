@@ -28,6 +28,10 @@ const TagIcon = styled(FaTag)`
   margin-right: 0.25em;
 `;
 
+const ArticleTitle = styled.h2`
+  margin-top: 0.5em;
+`;
+
 const TIL = ({
   data: {
     contentfulTil: {
@@ -61,7 +65,7 @@ const TIL = ({
             </Link>
           ))}
         </Tags>
-        <h2>{title}</h2>
+        <ArticleTitle>{title}</ArticleTitle>
       </header>
       <section dangerouslySetInnerHTML={{ __html: summary }} />
       {example && (

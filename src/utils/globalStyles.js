@@ -14,7 +14,8 @@ const globalStyles = css`
     --blockCode-bg: #252728;
   }
 
-  ul {
+  ul,
+  ol {
     list-style-position: inside;
   }
 
@@ -28,6 +29,7 @@ const globalStyles = css`
   section > h5,
   section > p,
   section > ul,
+  section > ol,
   section > blockquote,
   pre[class*='language-'] {
     margin: 0 20px;
