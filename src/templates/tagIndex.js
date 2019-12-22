@@ -29,10 +29,10 @@ const TagIndexPage = ({
       description="Stuff I learned one day"
     >
       <header>
-        <h2>
+        <h3>
           <TagIcon />
           {tag}
-        </h2>
+        </h3>
       </header>
       {indexedTils.map(til => (
         <TilListItem key={til.slug} {...til} />

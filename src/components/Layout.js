@@ -6,10 +6,9 @@ import MetaData from './MetaData';
 import Header from './Header';
 import globalStyles from '../utils/globalStyles';
 
-// import { StringsProvider } from '../utils/strings';
-// import { FlagsProvider } from '../utils/featureFlags';
-
-const Container = styled.div``;
+const Container = styled.div`
+  background-color: var(--body-bg);
+`;
 
 const Main = styled.main``;
 

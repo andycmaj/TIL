@@ -6,12 +6,17 @@ const globalStyles = css`
   body.light {
     --bg: #ffffff;
     --textNormal: #222;
-    --textTitle: #222;
-    --textLink: #00a385;
+    --textTitle: #00856c;
+    --textLink: #3650bd;
     --hr: hsla(0, 0%, 0%, 0.2);
     --inlineCode-bg: rgba(255, 229, 100, 0.2);
     --inlineCode-text: #1a1a1a;
     --blockCode-bg: #252728;
+    --body-bg: #facb95;
+  }
+
+  body {
+    background-color: var(--body-bg);
   }
 
   ul,
@@ -21,6 +26,26 @@ const globalStyles = css`
 
   section td {
     border-bottom: none;
+  }
+
+  h2 {
+    font-size: 3em;
+  }
+
+  h3 {
+    font-size: 2em;
+  }
+
+  h4 {
+    font-size: 1.5em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: var(--textTitle);
   }
 
   header,
