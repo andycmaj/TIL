@@ -1,7 +1,16 @@
+import React from 'react';
+
 // auto track routes via `page()`
 import('./src/analytics/base.js').then(analytics => analytics.init());
 
 export const onRouteUpdate = ({ location }) => {};
+
+export const onClientEntry = () => {
+  if (process.env.NODE_ENV !== 'production') {
+    const whyDidYouRender = require('@welldone-software/why-did-you-render');
+    whyDidYouRender(React);
+  }
+};
 
 // export const wrapPageElement = ({ element, props }) => {
 //   // props provide same data to Layout as Page element will get
