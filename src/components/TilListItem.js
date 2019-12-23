@@ -22,13 +22,7 @@ const TilListItem = ({ slug, title, subtitle, author, date }) => (
         {toHumanDate(date)} by <Author {...author} />
       </small>
       <LinkContainer>
-        <AniLink
-          swipe
-          duration={2}
-          top="entry"
-          direction="left"
-          to={`/til/${slug}`}
-        >
+        <AniLink swipe top="exit" direction="left" to={`/til/${slug}`}>
           {title}
         </AniLink>
       </LinkContainer>

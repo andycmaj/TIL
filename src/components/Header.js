@@ -12,7 +12,7 @@ const SiteTitle = styled.h1`
 export default props => (
   <Header>
     <SiteTitle>
-      <AniLink top="exit" direction="right" swipe to="/">
+      <AniLink top="entry" direction="right" swipe to="/">
         The Daily TIL
       </AniLink>
     </SiteTitle>
