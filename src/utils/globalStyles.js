@@ -6,8 +6,8 @@ const globalStyles = css`
   body.light {
     --textNormal: #3d3836;
     --textSelection: #ccd59d;
-    --textTitle: #016c58;
-    --textLink: #3650bd;
+    --textTitle: #005633;
+    --textLink: #324299;
     --hr: hsla(0, 0%, 0%, 0.2);
     --inlineCode-bg: #f4e5b7;
     --inlineCode-text: #1a1a1a;
@@ -32,6 +32,10 @@ const globalStyles = css`
     border-bottom: none;
   }
 
+  h1 {
+    color: var(--textNormal);
+  }
+
   h2 {
     font-size: 3em;
   }
@@ -48,7 +52,6 @@ const globalStyles = css`
     font-size: 1em;
   }
 
-  h1,
   h2,
   h3,
   h4,
