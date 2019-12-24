@@ -5,17 +5,22 @@ import { rhythm } from './typography';
 const globalStyles = css`
   body.light {
     --textNormal: #222;
+    --textSelection: #ccd59d;
     --textTitle: #016c58;
     --textLink: #3650bd;
     --hr: hsla(0, 0%, 0%, 0.2);
     --inlineCode-bg: rgba(255, 229, 100, 0.2);
     --inlineCode-text: #1a1a1a;
     --blockCode-bg: #252728;
-    --body-bg: #facb95;
+    --body-bg: #f4e5b7;
   }
 
   body {
     background-color: var(--body-bg);
+  }
+
+  ::selection {
+    background-color: var(--textSelection);
   }
 
   ul,
@@ -39,12 +44,17 @@ const globalStyles = css`
     font-size: 1.5em;
   }
 
+  h5 {
+    font-size: 1em;
+  }
+
   h1,
   h2,
   h3,
   h4,
   h5 {
     color: var(--textTitle);
+    font-weight: 700;
   }
 
   header,
