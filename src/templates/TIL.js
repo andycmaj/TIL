@@ -26,6 +26,7 @@ const Tags = styled.small`
 const TagIcon = styled(FaTag)`
   vertical-align: middle;
   margin-right: 0.25em;
+  fill: var(--textLink);
 `;
 
 const ArticleTitle = styled.h2`

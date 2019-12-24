@@ -41,8 +41,9 @@ const Page = ({
     <Intro style={{ textAlign: 'center' }}>
       <Badges>
         <iframe
+          title="github-stars"
           src="https://ghbtns.com/github-btn.html?user=andycmaj&repo=TIL&type=star&count=true"
-          frameborder="0"
+          frameBorder="0"
           scrolling="0"
           width="100px"
           height="20px"
@@ -63,6 +64,8 @@ const Page = ({
     ))}
   </Layout>
 );
+
+Page.whyDidYouRender = true;
 
 export default Page;
 

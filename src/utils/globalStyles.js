@@ -4,14 +4,23 @@ import { rhythm } from './typography';
 
 const globalStyles = css`
   body.light {
-    --bg: #ffffff;
-    --textNormal: #222;
-    --textTitle: #222;
-    --textLink: #00a385;
+    --textNormal: #3d3836;
+    --textSelection: #ccd59d;
+    --textTitle: #005633;
+    --textLink: #324299;
     --hr: hsla(0, 0%, 0%, 0.2);
-    --inlineCode-bg: rgba(255, 229, 100, 0.2);
+    --inlineCode-bg: #f4e5b7;
     --inlineCode-text: #1a1a1a;
-    --blockCode-bg: #252728;
+    --blockCode-bg: #3d3836;
+    --body-bg: #f4e5b7;
+  }
+
+  body {
+    background-color: var(--body-bg);
+  }
+
+  ::selection {
+    background-color: var(--textSelection);
   }
 
   ul,
@@ -21,6 +30,34 @@ const globalStyles = css`
 
   section td {
     border-bottom: none;
+  }
+
+  h1 {
+    color: var(--textNormal);
+  }
+
+  h2 {
+    font-size: 3em;
+  }
+
+  h3 {
+    font-size: 2em;
+  }
+
+  h4 {
+    font-size: 1.5em;
+  }
+
+  h5 {
+    font-size: 1em;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: var(--textTitle);
+    font-weight: 700;
   }
 
   header,
@@ -155,7 +192,7 @@ const globalStyles = css`
   }
 
   .token.comment {
-    color: #757372;
+    color: #aaa;
   }
 
   .token.string,

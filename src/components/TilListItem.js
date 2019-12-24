@@ -2,16 +2,17 @@ import React from 'react';
 import toHumanDate from '../utils/toHumanDate';
 import styled from '@emotion/styled';
 import { rhythm } from '../utils/typography';
-import { Link } from 'gatsby';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 import Author from './Author';
 
 const Article = styled.article`
   margin-top: ${rhythm(2)};
   margin-bottom: ${rhythm(2)};
+`;
 
-  h2 {
-    margin: 0 0 ${rhythm(0.5)};
-  }
+const LinkContainer = styled.p`
+  font-size: 2em;
+  margin: 0;
 `;
 
 const TilListItem = ({ slug, title, subtitle, author, date }) => (
@@ -20,9 +21,11 @@ const TilListItem = ({ slug, title, subtitle, author, date }) => (
       <small>
         {toHumanDate(date)} by <Author {...author} />
       </small>
-      <h2>
-        <Link to={`/til/${slug}`}>{title}</Link>
-      </h2>
+      <LinkContainer>
+        <AniLink swipe top="exit" direction="left" to={`/til/${slug}`}>
+          {title}
+        </AniLink>
+      </LinkContainer>
     </header>
     <section>
       <p>{subtitle}</p>
