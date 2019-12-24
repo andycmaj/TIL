@@ -9,9 +9,9 @@ const globalStyles = css`
     --textTitle: #016c58;
     --textLink: #3650bd;
     --hr: hsla(0, 0%, 0%, 0.2);
-    --inlineCode-bg: rgba(255, 229, 100, 0.2);
+    --inlineCode-bg: #f4e5b7;
     --inlineCode-text: #1a1a1a;
-    --blockCode-bg: #252728;
+    --blockCode-bg: #3d3836;
     --body-bg: #f4e5b7;
   }
 
@@ -189,7 +189,7 @@ const globalStyles = css`
   }
 
   .token.comment {
-    color: #757372;
+    color: #aaa;
   }
 
   .token.string,
