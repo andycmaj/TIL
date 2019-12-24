@@ -4,7 +4,7 @@ import { rhythm } from './typography';
 
 const globalStyles = css`
   body.light {
-    --textNormal: #222;
+    --textNormal: #3d3836;
     --textSelection: #ccd59d;
     --textTitle: #016c58;
     --textLink: #3650bd;
